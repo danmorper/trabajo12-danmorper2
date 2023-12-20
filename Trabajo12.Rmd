@@ -1,0 +1,268 @@
+---
+title: "Trabajo 12"
+author: "Daniel Moreno Pérez"
+date: "2023-12-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+Entrada de datos:
+```{r}
+# Puntos de datos
+horas_juego <- c(0, 15, 3, 5, 5, 0, 13, 8, 7, 17, 18, 10)
+rendimiento <- c(4.00, 2.5, 4.0, 3.9, 3.75, 3.8, 2.9, 3.1, 3.25, 1.5, 1.75, 2.98)
+```
+
+# a) Diagrama de dispersión
+```{r}
+library(ggplot2)
+
+# Creando un dataframe
+datos <- data.frame(horas_juego, rendimiento)
+
+# Creando el gráfico
+ggplot(datos, aes(x = horas_juego, y = rendimiento)) +
+  geom_point() + 
+  theme_minimal() +
+  labs(title = "Gráfico de Dispersión de Horas de Juego vs Rendimiento Académico",
+       x = "Horas de Videojuegos por Semana",
+       y = "Rendimiento Académico")
+```
+
+# b) vector observación, $y$
+El vector observación sería: $y = (4.00, 2.5, 4.0, 3.9, 3.75, 3.8, 2.9, 3.1, 3.25, 1.5, 1.75, 2.98)'$
+
+# c) vector $x$  y $U_2$
+## vector $x$
+```{r}
+# Vector x
+x <- horas_juego
+
+# Vector U_1
+U_1 <- (1/sqrt(12)) * rep(1, 12)
+```
+
+## $U_2$
+Para calcular el vector $U_2$, necesitamos seguir algunos pasos.
+Primero, calculemos la media de $x$:
+
+$\bar{x} = \frac{\sum x_i}{n}$
+
+Luego, $x - \bar{x}$, que es simplemente restar $\bar{x}$ de cada elemento de $x$.
+
+Finalmente, normalizamos este vector para obtener $U_2$:
+
+$U_2 = \frac{x - \bar{x}}{|x - \bar{x}|}$
+
+donde $|x - \bar{x}|$ es la norma (o longitud) del vector $x - \bar{x}$.
+
+```{r}
+# Calculamos la media de x
+media_x <- mean(horas_juego)
+
+# Calculamos x menos la media de x (x - media_x)
+diferencia_x <- horas_juego - media_x
+
+# Calculamos la norma de la diferencia (la longitud del vector diferencia_x)
+norma_diferencia_x <- sqrt(sum(diferencia_x^2))
+
+# Finalmente, calculamos U_2 dividiendo la diferencia_x por su norma
+U_2 <- diferencia_x / norma_diferencia_x
+
+# Mostramos el vector U_2
+U_2
+```
+
+# d) proyecciones
+
+$P_{U_1}(y) = y \cdot U_1$
+
+$P_{U_2}(y) = y \cdot U_2$
+
+El código en R para estos cálculos sería el siguiente:
+
+```{r}
+y = rendimiento
+# Asumiendo que las variables y, U_1, y U_2 ya están definidas correctamente
+# Producto punto de y y U_1
+proyeccion_y_U_1 <- sum(y * U_1)
+
+# Producto punto de y y U_2
+proyeccion_y_U_2 <- sum(y * U_2)
+
+# Mostrando los resultados
+proyeccion_y_U_1
+proyeccion_y_U_2
+```
+
+# e) Descomposición y digrama
+## Descomoposición
+
+La descomposición del vector de observación $y$ se puede escribir como:
+
+$y = PU_1 y + PU_2 y + e$
+
+En R, podemos calcular los vectores de proyección y luego usarlos para obtener la descomposición:
+
+```{r}
+# Calculamos los vectores de proyección
+PU_1_y <- proyeccion_y_U_1 * U_1
+PU_2_y <- proyeccion_y_U_2 * U_2
+
+# El vector media es PU_1 y
+vector_media <- PU_1_y
+
+# El vector pendiente es PU_2 y
+vector_pendiente <- PU_2_y
+
+# El vector error es la diferencia entre y y todas las proyecciones
+vector_error <- y - (vector_media + vector_pendiente)
+
+# Descomposición del vector de observación
+y_descomposicion <- vector_media + vector_pendiente + vector_error
+
+# Verificamos la descomposición
+y_descomposicion
+```
+
+## Diagrama
+
+![Diagrama de pitágoras en tres dimensiones](diagrama.jpeg)
+
+# f) Regresión lineal
+Para estimar la pendiente $\beta_1$ en un modelo de regresión lineal simple, utilizamos la fórmula:
+
+$\beta_1 = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sum{(x_i - \bar{x})^2}}$
+
+donde:
+
+$x_i$ son los valores del predictor (horas de juego),
+$y_i$ son los valores de la respuesta (rendimiento académico),
+$\bar{x}$ es la media de los valores del predictor,
+$\bar{y}$ es la media de los valores de la respuesta.
+Una vez obtenido $\beta_1$, calculamos el término de intercepción $\beta_0$ con la fórmula:
+
+$\beta_0 = \bar{y} - \beta_1\bar{x}$
+
+La ecuación de la regresión lineal es:
+
+$y = \beta_0 + \beta_1(x - \bar{x})$
+
+```{r}
+
+# Cálculo de las medias
+media_x <- mean(horas_juego)
+media_y <- mean(rendimiento)
+
+# Estimación de la pendiente beta_1
+beta_1 <- sum((horas_juego - media_x) * (rendimiento - media_y)) / sum((horas_juego - media_x)^2)
+
+# Estimación del término de intercepción beta_0
+beta_0 <- media_y - beta_1 * media_x
+
+# Creando el gráfico con la línea de ajuste
+ggplot(datos, aes(x = horas_juego, y = rendimiento)) +
+  geom_point() +
+  geom_abline(intercept = beta_0, slope = beta_1, col = "blue") +
+  theme_minimal() +
+  labs(title = "Ajuste Lineal de Horas de Juego vs Rendimiento Académico",
+       x = "Horas de Videojuegos por Semana",
+       y = "Rendimiento Académico")
+```
+
+Un buen ajuste mostraría la mayoría de los puntos cercanos a la línea.
+
+# g) Pitágoras y varianza
+
+## Pitágoras
+Comprobeamos que se cumpla la siguiente igualdad
+$|y|^2 = (y \cdot U_1)^2 + (y \cdot U_2)^2 + |e|^2$
+
+
+```{r}
+# Norma al cuadrado de y
+norma_y_cuadrado <- sum(y^2)
+
+# Cuadrado de la proyección sobre U_1
+proyeccion_y_U_1_cuadrado <- (sum(y * U_1))^2
+
+# Cuadrado de la proyección sobre U_2
+proyeccion_y_U_2_cuadrado <- (sum(y * U_2))^2
+
+# Norma al cuadrado del vector de error
+norma_error_cuadrado <- sum(vector_error^2)
+
+# Verificamos la descomposición de Pitágoras
+pitagoras_comprobacion <- proyeccion_y_U_1_cuadrado + proyeccion_y_U_2_cuadrado + norma_error_cuadrado
+
+# Mostramos los resultados
+norma_y_cuadrado
+pitagoras_comprobacion
+```
+
+Si la comprobación de Pitágoras es correcta, la suma de los cuadrados de las proyecciones y la norma al cuadrado del vector de error debe ser igual a la norma al cuadrado de $y$.
+
+## Varianza $\sigma^2$
+También podemos estimar la varianza $\sigma^2$ con la norma al cuadrado del vector de error dividido por los grados de libertad (n - 2 para regresión lineal simple).
+
+```{r}
+# Estimación de la varianza sigma^2
+n <- length(y)
+grados_libertad <- n - 2
+varianza_estimada <- norma_error_cuadrado / grados_libertad
+
+# Mostramos los resultados
+varianza_estimada
+```
+
+# h) Contraste de hipótesis
+
+El test $F = \frac{(y \cdot U_2)^2}{(|e|^2 / (n - 2))}$ se utiliza para contrastar la hipótesis nula $H_0: \beta_1 = 0$ frente a la hipótesis alternativa $H_1: \beta_1 \neq 0$.
+
+
+```{r}
+# Cálculo del F-test
+F_test <- (proyeccion_y_U_2_cuadrado) / (norma_error_cuadrado / grados_libertad)
+
+# Mostramos el valor del F-test
+F_test
+
+df1 <- 1 # grados de libertad (sólo una ecuación a contrastar luego un grado de libertad)
+df2 <- 10 # grados de libertad de la varianza
+
+# Cuantiles para una distribución F
+cuantil_0_9 <- qf(0.9, df1, df2)
+cuantil_0_95 <- qf(0.95, df1, df2)
+cuantil_0_99 <- qf(0.99, df1, df2)
+
+# Mostrar cuantiles
+cuantil_0_9
+cuantil_0_95
+cuantil_0_99
+```
+
+Como el valor de F es mayor que el percentil 99 entonces puedo rechazar $H_0$ con una significación del $1%$ y concluir que $\beta_1$ es distinto de cero.
+
+# i) Coeficiente de correlación lineal
+
+$r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2}\sum{(y_i - \bar{y})^2}}}$
+
+Este coeficiente mide la fuerza y la dirección de la relación lineal entre las variables. Un valor de $r^2$ cercano a 1 indica una relación lineal fuerte.
+
+```{r}
+# Cálculo del coeficiente de correlación lineal
+r <- sum((horas_juego - media_x) * (rendimiento - media_y)) / 
+     (sqrt(sum((horas_juego - media_x)^2) * sum((rendimiento - media_y)^2)))
+
+# Mostramos el valor del coeficiente de correlación lineal
+r
+
+# Cuadrado del coeficiente de correlación lineal para comparar con F-test
+r_cuadrado <- r^2
+r_cuadrado
+```
+
+Si $r^2$ es cercano a 1, y el F-test es significativo, ambas pruebas concluyen que existe una relación lineal significativa entre las horas de juego y el rendimiento académico

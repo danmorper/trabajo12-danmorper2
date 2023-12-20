@@ -1,0 +1,25 @@
+# Ignorar archivos y carpetas generados por R y LaTeX
+*.Rproj
+*.log
+*.aux
+*.out
+*.pdf
+*.html
+
+# Ignorar imágenes generadas
+*.jpeg
+
+# Ignorar archivos generados por sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de caché de R
+.RData
+.Rhistory
+
+# Ignorar carpetas de paquetes de R
+.packrat/
+renv/
+
+# Ignorar la carpeta .git (para evitar que Git se incluya a sí mismo)
+.git/

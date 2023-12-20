@@ -1,0 +1,532 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Trabajo 12},
+  pdfauthor={Daniel Moreno Pérez},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Trabajo 12}
+\author{Daniel Moreno Pérez}
+\date{2023-12-20}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+Entrada de datos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Puntos de datos}
+\NormalTok{horas\_juego }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{rendimiento }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{4.00}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{3.9}\NormalTok{, }\FloatTok{3.75}\NormalTok{, }\FloatTok{3.8}\NormalTok{, }\FloatTok{2.9}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{3.25}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\FloatTok{1.75}\NormalTok{, }\FloatTok{2.98}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-diagrama-de-dispersiuxf3n}{%
+\section{a) Diagrama de dispersión}\label{a-diagrama-de-dispersiuxf3n}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Creando un dataframe}
+\NormalTok{datos }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(horas\_juego, rendimiento)}
+
+\CommentTok{\# Creando el gráfico}
+\FunctionTok{ggplot}\NormalTok{(datos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ horas\_juego, }\AttributeTok{y =}\NormalTok{ rendimiento)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Gráfico de Dispersión de Horas de Juego vs Rendimiento Académico"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Horas de Videojuegos por Semana"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Rendimiento Académico"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Trabajo12_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{b-vector-observaciuxf3n-y}{%
+\section{\texorpdfstring{b) vector observación,
+\(y\)}{b) vector observación, y}}\label{b-vector-observaciuxf3n-y}}
+
+El vector observación sería:
+\(y = (4.00, 2.5, 4.0, 3.9, 3.75, 3.8, 2.9, 3.1, 3.25, 1.5, 1.75, 2.98)'\)
+
+\hypertarget{c}{%
+\section{c)}\label{c}}
+
+\hypertarget{vector-x}{%
+\subsection{\texorpdfstring{vector \(x\)}{vector x}}\label{vector-x}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Vector x}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ horas\_juego}
+
+\CommentTok{\# Vector U\_1}
+\NormalTok{U\_1 }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{*} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{u_2}{%
+\subsection{\texorpdfstring{\(U_2\)}{U\_2}}\label{u_2}}
+
+Para calcular el vector \(U_2\), necesitamos seguir algunos pasos.
+Primero, calculemos la media de \(x\):
+
+\(\bar{x} = \frac{\sum x_i}{n}\)
+
+Luego, \(x - \bar{x}\), que es simplemente restar \(\bar{x}\) de cada
+elemento de \(x\).
+
+Finalmente, normalizamos este vector para obtener \(U_2\):
+
+\(U_2 = \frac{x - \bar{x}}{|x - \bar{x}|}\)
+
+donde \(|x - \bar{x}|\) es la norma (o longitud) del vector
+\(x - \bar{x}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculamos la media de x}
+\NormalTok{media\_x }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(horas\_juego)}
+
+\CommentTok{\# Calculamos x menos la media de x (x {-} media\_x)}
+\NormalTok{diferencia\_x }\OtherTok{\textless{}{-}}\NormalTok{ horas\_juego }\SpecialCharTok{{-}}\NormalTok{ media\_x}
+
+\CommentTok{\# Calculamos la norma de la diferencia (la longitud del vector diferencia\_x)}
+\NormalTok{norma\_diferencia\_x }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{(diferencia\_x}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+
+\CommentTok{\# Finalmente, calculamos U\_2 dividiendo la diferencia\_x por su norma}
+\NormalTok{U\_2 }\OtherTok{\textless{}{-}}\NormalTok{ diferencia\_x }\SpecialCharTok{/}\NormalTok{ norma\_diferencia\_x}
+
+\CommentTok{\# Mostramos el vector U\_2}
+\NormalTok{U\_2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] -0.40639997  0.31787720 -0.26154453 -0.16497425 -0.16497425 -0.40639997
+##  [7]  0.22130691 -0.02011881 -0.06840396  0.41444749  0.46273264  0.07645148
+\end{verbatim}
+
+\hypertarget{d-proyecciones}{%
+\section{d) proyecciones}\label{d-proyecciones}}
+
+\(proyeccion_y_{U_1} = y \cdot U_1\)
+
+\(proyeccion_y_{U_2} = y \cdot U_2\)
+
+El código en R para estos cálculos sería el siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{=}\NormalTok{ rendimiento}
+\CommentTok{\# Asumiendo que las variables y, U\_1, y U\_2 ya están definidas correctamente}
+\CommentTok{\# Producto punto de y y U\_1}
+\NormalTok{proyeccion\_y\_U\_1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y }\SpecialCharTok{*}\NormalTok{ U\_1)}
+
+\CommentTok{\# Producto punto de y y U\_2}
+\NormalTok{proyeccion\_y\_U\_2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y }\SpecialCharTok{*}\NormalTok{ U\_2)}
+
+\CommentTok{\# Mostrando los resultados}
+\NormalTok{proyeccion\_y\_U\_1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10.80511
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{proyeccion\_y\_U\_2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -2.66707
+\end{verbatim}
+
+\hypertarget{e}{%
+\section{e)}\label{e}}
+
+\hypertarget{descomoposiciuxf3n}{%
+\subsection{Descomoposición}\label{descomoposiciuxf3n}}
+
+La descomposición del vector de observación \(y\) se puede escribir
+como:
+
+\(y = PU_1 y + PU_2 y + e\)
+
+En R, podemos calcular los vectores de proyección y luego usarlos para
+obtener la descomposición:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculamos los vectores de proyección}
+\NormalTok{PU\_1\_y }\OtherTok{\textless{}{-}}\NormalTok{ proyeccion\_y\_U\_1 }\SpecialCharTok{*}\NormalTok{ U\_1}
+\NormalTok{PU\_2\_y }\OtherTok{\textless{}{-}}\NormalTok{ proyeccion\_y\_U\_2 }\SpecialCharTok{*}\NormalTok{ U\_2}
+
+\CommentTok{\# El vector media es PU\_1 y}
+\NormalTok{vector\_media }\OtherTok{\textless{}{-}}\NormalTok{ PU\_1\_y}
+
+\CommentTok{\# El vector pendiente es PU\_2 y}
+\NormalTok{vector\_pendiente }\OtherTok{\textless{}{-}}\NormalTok{ PU\_2\_y}
+
+\CommentTok{\# El vector error es la diferencia entre y y todas las proyecciones}
+\NormalTok{vector\_error }\OtherTok{\textless{}{-}}\NormalTok{ y }\SpecialCharTok{{-}}\NormalTok{ (vector\_media }\SpecialCharTok{+}\NormalTok{ vector\_pendiente)}
+
+\CommentTok{\# Descomposición del vector de observación}
+\NormalTok{y\_descomposicion }\OtherTok{\textless{}{-}}\NormalTok{ vector\_media }\SpecialCharTok{+}\NormalTok{ vector\_pendiente }\SpecialCharTok{+}\NormalTok{ vector\_error}
+
+\CommentTok{\# Verificamos la descomposición}
+\NormalTok{y\_descomposicion}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 4.00 2.50 4.00 3.90 3.75 3.80 2.90 3.10 3.25 1.50 1.75 2.98
+\end{verbatim}
+
+\hypertarget{diagrama}{%
+\subsection{Diagrama}\label{diagrama}}
+
+\begin{figure}
+\centering
+\includegraphics{diagrama.jpeg}
+\caption{Diagrama de pitágoras en tres dimensiones}
+\end{figure}
+
+\hypertarget{f-regresiuxf3n-lineal}{%
+\section{f) Regresión lineal}\label{f-regresiuxf3n-lineal}}
+
+Para estimar la pendiente \(\beta_1\) en un modelo de regresión lineal
+simple, utilizamos la fórmula:
+
+\(\beta_1 = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sum{(x_i - \bar{x})^2}}\)
+
+donde:
+
+\(x_i\) son los valores del predictor (horas de juego), \(y_i\) son los
+valores de la respuesta (rendimiento académico), \(\bar{x}\) es la media
+de los valores del predictor, \(\bar{y}\) es la media de los valores de
+la respuesta. Una vez obtenido \(\beta_1\), calculamos el término de
+intercepción \(\beta_0\) con la fórmula:
+
+\(\beta_0 = \bar{y} - \beta_1\bar{x}\)
+
+La ecuación de la regresión lineal es:
+
+\(y = \beta_0 + \beta_1(x - \bar{x})\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cálculo de las medias}
+\NormalTok{media\_x }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(horas\_juego)}
+\NormalTok{media\_y }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(rendimiento)}
+
+\CommentTok{\# Estimación de la pendiente beta\_1}
+\NormalTok{beta\_1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((horas\_juego }\SpecialCharTok{{-}}\NormalTok{ media\_x) }\SpecialCharTok{*}\NormalTok{ (rendimiento }\SpecialCharTok{{-}}\NormalTok{ media\_y)) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{((horas\_juego }\SpecialCharTok{{-}}\NormalTok{ media\_x)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Estimación del término de intercepción beta\_0}
+\NormalTok{beta\_0 }\OtherTok{\textless{}{-}}\NormalTok{ media\_y }\SpecialCharTok{{-}}\NormalTok{ beta\_1 }\SpecialCharTok{*}\NormalTok{ media\_x}
+
+\CommentTok{\# Creando el gráfico con la línea de ajuste}
+\FunctionTok{ggplot}\NormalTok{(datos, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ horas\_juego, }\AttributeTok{y =}\NormalTok{ rendimiento)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ beta\_0, }\AttributeTok{slope =}\NormalTok{ beta\_1, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Ajuste Lineal de Horas de Juego vs Rendimiento Académico"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Horas de Videojuegos por Semana"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Rendimiento Académico"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Trabajo12_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Un buen ajuste mostraría la mayoría de los puntos cercanos a la línea.
+
+\hypertarget{g}{%
+\section{g)}\label{g}}
+
+\hypertarget{pituxe1goras}{%
+\subsection{Pitágoras}\label{pituxe1goras}}
+
+Comprobeamos que se cumpla la siguiente igualdad
+\(|y|^2 = (y \cdot U_1)^2 + (y \cdot U_2)^2 + |e|^2\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Norma al cuadrado de y}
+\NormalTok{norma\_y\_cuadrado }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Cuadrado de la proyección sobre U\_1}
+\NormalTok{proyeccion\_y\_U\_1\_cuadrado }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(y }\SpecialCharTok{*}\NormalTok{ U\_1))}\SpecialCharTok{\^{}}\DecValTok{2}
+
+\CommentTok{\# Cuadrado de la proyección sobre U\_2}
+\NormalTok{proyeccion\_y\_U\_2\_cuadrado }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(y }\SpecialCharTok{*}\NormalTok{ U\_2))}\SpecialCharTok{\^{}}\DecValTok{2}
+
+\CommentTok{\# Norma al cuadrado del vector de error}
+\NormalTok{norma\_error\_cuadrado }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(vector\_error}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Verificamos la descomposición de Pitágoras}
+\NormalTok{pitagoras\_comprobacion }\OtherTok{\textless{}{-}}\NormalTok{ proyeccion\_y\_U\_1\_cuadrado }\SpecialCharTok{+}\NormalTok{ proyeccion\_y\_U\_2\_cuadrado }\SpecialCharTok{+}\NormalTok{ norma\_error\_cuadrado}
+
+\CommentTok{\# Mostramos los resultados}
+\NormalTok{norma\_y\_cuadrado}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 124.7379
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pitagoras\_comprobacion}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 124.7379
+\end{verbatim}
+
+Si la comprobación de Pitágoras es correcta, la suma de los cuadrados de
+las proyecciones y la norma al cuadrado del vector de error debe ser
+igual a la norma al cuadrado de \(y\).
+
+\hypertarget{varianza-sigma2}{%
+\subsection{\texorpdfstring{Varianza
+\(\sigma^2\)}{Varianza \textbackslash sigma\^{}2}}\label{varianza-sigma2}}
+
+También podemos estimar la varianza \(\sigma^2\) con la norma al
+cuadrado del vector de error dividido por los grados de libertad (n - 2
+para regresión lineal simple).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Estimación de la varianza sigma\^{}2}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(y)}
+\NormalTok{grados\_libertad }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{{-}} \DecValTok{2}
+\NormalTok{varianza\_estimada }\OtherTok{\textless{}{-}}\NormalTok{ norma\_error\_cuadrado }\SpecialCharTok{/}\NormalTok{ grados\_libertad}
+
+\CommentTok{\# Mostramos los resultados}
+\NormalTok{varianza\_estimada}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08742281
+\end{verbatim}
+
+\hypertarget{h-contraste-de-hipuxf3tesis}{%
+\section{h) Contraste de hipótesis}\label{h-contraste-de-hipuxf3tesis}}
+
+El test \(F = \frac{(y \cdot U_2)^2}{(|e|^2 / (n - 2))}\) se utiliza
+para contrastar la hipótesis nula \(H_0: \beta_1 = 0\) frente a la
+hipótesis alternativa \(H_1: \beta_1 \neq 0\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cálculo del F{-}test}
+\NormalTok{F\_test }\OtherTok{\textless{}{-}}\NormalTok{ (proyeccion\_y\_U\_2\_cuadrado) }\SpecialCharTok{/}\NormalTok{ (norma\_error\_cuadrado }\SpecialCharTok{/}\NormalTok{ grados\_libertad)}
+
+\CommentTok{\# Mostramos el valor del F{-}test}
+\NormalTok{F\_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 81.36622
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# grados de libertad (sólo una ecuación a contrastar luego un grado de libertad)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \DecValTok{10} \CommentTok{\# grados de libertad de la varianza}
+
+\CommentTok{\# Cuantiles para una distribución F}
+\NormalTok{cuantil\_0\_9 }\OtherTok{\textless{}{-}} \FunctionTok{qf}\NormalTok{(}\FloatTok{0.9}\NormalTok{, df1, df2)}
+\NormalTok{cuantil\_0\_95 }\OtherTok{\textless{}{-}} \FunctionTok{qf}\NormalTok{(}\FloatTok{0.95}\NormalTok{, df1, df2)}
+\NormalTok{cuantil\_0\_99 }\OtherTok{\textless{}{-}} \FunctionTok{qf}\NormalTok{(}\FloatTok{0.99}\NormalTok{, df1, df2)}
+
+\CommentTok{\# Mostrar cuantiles}
+\NormalTok{cuantil\_0\_9}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.285015
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cuantil\_0\_95}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.964603
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cuantil\_0\_99}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10.04429
+\end{verbatim}
+
+Como el valor de F es mayor que el percentil 99 entonces puedo rechazar
+\(H_0\) con una significación del \(1%
+\) y concluir que \(\beta_1\) es distinto de cero.
+
+\hypertarget{i-coeficiente-de-correlaciuxf3n-lineal}{%
+\section{i) Coeficiente de correlación
+lineal}\label{i-coeficiente-de-correlaciuxf3n-lineal}}
+
+\(r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2}\sum{(y_i - \bar{y})^2}}}\)
+
+Este coeficiente mide la fuerza y la dirección de la relación lineal
+entre las variables. Un valor de \(r^2\) cercano a 1 indica una relación
+lineal fuerte.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cálculo del coeficiente de correlación lineal}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((horas\_juego }\SpecialCharTok{{-}}\NormalTok{ media\_x) }\SpecialCharTok{*}\NormalTok{ (rendimiento }\SpecialCharTok{{-}}\NormalTok{ media\_y)) }\SpecialCharTok{/} 
+\NormalTok{     (}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{((horas\_juego }\SpecialCharTok{{-}}\NormalTok{ media\_x)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sum}\NormalTok{((rendimiento }\SpecialCharTok{{-}}\NormalTok{ media\_y)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)))}
+
+\CommentTok{\# Mostramos el valor del coeficiente de correlación lineal}
+\NormalTok{r}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.9436898
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Cuadrado del coeficiente de correlación lineal para comparar con F{-}test}
+\NormalTok{r\_cuadrado }\OtherTok{\textless{}{-}}\NormalTok{ r}\SpecialCharTok{\^{}}\DecValTok{2}
+\NormalTok{r\_cuadrado}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8905504
+\end{verbatim}
+
+Si \(r^2\) es cercano a 1, y el F-test es significativo, ambas pruebas
+concluyen que existe una relación lineal significativa entre las horas
+de juego y el rendimiento académico
+
+\end{document}
