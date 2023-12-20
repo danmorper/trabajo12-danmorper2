@@ -16,6 +16,7 @@ Thumbs.db
 # Ignorar archivos de caché de R
 .RData
 .Rhistory
+.Rproj.user/
 
 # Ignorar carpetas de paquetes de R
 .packrat/
